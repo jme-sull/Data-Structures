@@ -1,3 +1,4 @@
+
 class Node:
     def __init__(self, value, next_node = None):
         self.value = value
@@ -11,6 +12,7 @@ class Node:
     
     def set_next(self, new_next):
         self.next_node = new_next
+
 
 class LinkedList:
     def __init__(self):
@@ -26,7 +28,19 @@ class LinkedList:
         else:
             self.tail.set_next(new_node)
             self.tail = new_node
+      
+    def add_to_head(self, value): 
+        
+        new_node = Node(value)
 
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node    
+        else:
+            current = self.head
+            self.head = new_node
+            self.head.set_next(current)
+            
     def remove_tail(self):
         if self.head is None and self.tail is None:
             return None
@@ -47,18 +61,6 @@ class LinkedList:
             self.tail = current 
             self.tail.set_next(None)
             return val 
-    
-    def contains(self, value):
- 
-        current = self.head
-            
-        while current.get_next() != self.tail:
-            if current == value:
-                return current == value 
-            else:
-                current = current.get_next()
-        
-        return False
         
 
     def remove_head(self):
@@ -71,12 +73,11 @@ class LinkedList:
             self.head = None
             self.tail = None 
             return val 
-
+        
         else:
             val = self.head.get_value()
-            self.head = self.head.get_next()
+            self.head = self.head.next_node
             return val 
-
             
 
 
